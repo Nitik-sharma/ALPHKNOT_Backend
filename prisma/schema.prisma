@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model BookCall {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  date      String
+  time      String
+  status    String @default("pending")
+   meetingLink String?
+  createdAt DateTime @default(now())
+}
