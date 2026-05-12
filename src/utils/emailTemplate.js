@@ -1,12 +1,30 @@
 export const emailTemplate = (name, date, time, id) => {
   return `
     <div style="font-family: Arial, sans-serif; background: #f0f0f0; padding: 40px 16px;">
-      <div style="max-width: 560px; margin: auto; background: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #ddd;">
+      <style>
+        @media (max-width: 480px) {
+          .ak-card { border-radius: 10px !important; }
+          .ak-header { padding: 18px 16px 16px !important; }
+          .ak-body { padding: 20px 16px !important; }
+          .ak-name { font-size: 17px !important; }
+          .ak-details-card { padding: 16px !important; }
+          .ak-details-grid { grid-template-columns: 1fr !important; gap: 12px !important; }
+          .ak-btn-row { flex-direction: column !important; }
+          .ak-btn-row a { flex: unset !important; width: 100% !important; }
+          .ak-footer { flex-direction: column !important; gap: 12px !important; }
+        }
+        @media (max-width: 360px) {
+          .ak-body { padding: 14px 12px !important; }
+          .ak-header { padding: 14px 12px !important; }
+        }
+      </style>
+
+      <div class="ak-card" style="max-width: 560px; margin: auto; background: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #ddd;">
 
         <!-- Header -->
-        <div style="background: #0B1E3E; padding: 28px 32px 24px;">
+        <div class="ak-header" style="background: #0B1E3E; padding: 28px 32px 24px;">
           <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-            <div style="width: 36px; height: 36px; background: #C9A45C; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+            <div style="width: 36px; height: 36px; background: #C9A45C; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M10 2L12.5 7.5H18L13.5 11L15.5 16.5L10 13L4.5 16.5L6.5 11L2 7.5H7.5L10 2Z" fill="#0B1E3E"/>
               </svg>
@@ -14,7 +32,7 @@ export const emailTemplate = (name, date, time, id) => {
             <span style="font-size: 18px; font-weight: 600; color: #F5F0E8; letter-spacing: 0.04em;">AlphKnot</span>
           </div>
           <div style="display: flex; align-items: center; gap: 8px;">
-            <div style="width: 10px; height: 10px; background: #C9A45C; border-radius: 50%;"></div>
+            <div style="width: 10px; height: 10px; background: #C9A45C; border-radius: 50%; flex-shrink: 0;"></div>
             <span style="font-size: 12px; color: #C9A45C; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">Meeting Confirmed</span>
           </div>
         </div>
@@ -23,18 +41,18 @@ export const emailTemplate = (name, date, time, id) => {
         <div style="height: 3px; background: linear-gradient(90deg, #C9A45C 0%, #E8C878 50%, #C9A45C 100%);"></div>
 
         <!-- Body -->
-        <div style="padding: 32px;">
+        <div class="ak-body" style="padding: 32px;">
 
           <p style="font-size: 14px; color: #888; margin: 0 0 4px;">Hello,</p>
-          <p style="font-size: 20px; font-weight: 600; color: #0B0B0F; margin: 0 0 20px;">${name}</p>
+          <p class="ak-name" style="font-size: 20px; font-weight: 600; color: #0B0B0F; margin: 0 0 20px;">${name}</p>
 
           <p style="font-size: 14px; color: #555; line-height: 1.7; margin: 0 0 24px;">
             Your meeting has been successfully scheduled. We look forward to connecting with you at the time below.
           </p>
 
           <!-- Details Card -->
-          <div style="background: #0B1E3E; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="ak-details-card" style="background: #0B1E3E; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px;">
+            <div class="ak-details-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
               <div>
                 <p style="font-size: 11px; color: #C9A45C; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; margin: 0 0 4px;">Date</p>
                 <p style="font-size: 15px; color: #F5F0E8; font-weight: 600; margin: 0;">${date}</p>
@@ -51,7 +69,7 @@ export const emailTemplate = (name, date, time, id) => {
           </div>
 
           <!-- Action Buttons -->
-          <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+          <div class="ak-btn-row" style="display: flex; gap: 10px; margin-bottom: 16px;">
 
             <!-- Accept -->
             <a href="http://localhost:5000/api/book-call/accept/${id}"
@@ -111,7 +129,7 @@ export const emailTemplate = (name, date, time, id) => {
           </p>
 
           <!-- Footer -->
-          <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #eee; padding-top: 20px;">
+          <div class="ak-footer" style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #eee; padding-top: 20px;">
             <div>
               <p style="font-size: 13px; font-weight: 600; color: #0B0B0F; margin: 0;">AlphKnot</p>
               <p style="font-size: 11px; color: #999; margin: 2px 0 0;">Global Services Company</p>
