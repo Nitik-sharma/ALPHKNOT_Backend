@@ -62,104 +62,175 @@ export const acceptBooking = async (req, res) => {
     });
 
     // send final email to client
-    await sendEmail(
-      booking.email,
-      "Meeting Confirmed – AlphKnot",
-      `
-    <div style="font-family: Arial, sans-serif; background: #f0f0f0; padding: 40px 16px;">
-      <style>
-        @media (max-width: 480px) {
-          .ak-card { border-radius: 10px !important; }
-          .ak-header { padding: 18px 16px 16px !important; }
-          .ak-body { padding: 20px 16px !important; }
-          .ak-name { font-size: 17px !important; }
-          .ak-details-card { padding: 16px !important; }
-          .ak-details-row { flex-direction: column !important; gap: 12px !important; }
-          .ak-footer { flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; }
-        }
-        @media (max-width: 360px) {
-          .ak-header { padding: 14px 12px !important; }
-          .ak-body { padding: 14px 12px !important; }
-        }
-      </style>
+   await sendEmail(
+  booking.email,
+  "Meeting Confirmed – AlphKnot",
+  `
+  <div style="font-family:Arial,sans-serif;background:#f0f0f0;padding:20px 10px;">
+    <div style="max-width:560px;margin:auto;background:#fff;border-radius:14px;overflow:hidden;border:1px solid #ddd;">
 
-      <div class="ak-card" style="max-width: 560px; margin: auto; background: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #ddd;">
-
-        <!-- Header -->
-        <div class="ak-header" style="background: #0B1E3E; padding: 28px 32px 24px;">
-          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-            <div style="width: 36px; height: 36px; background: #C9A45C; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M10 2L12.5 7.5H18L13.5 11L15.5 16.5L10 13L4.5 16.5L6.5 11L2 7.5H7.5L10 2Z" fill="#0B1E3E"/>
-              </svg>
-            </div>
-            <span style="font-size: 18px; font-weight: 600; color: #F5F0E8;">AlphKnot</span>
+      <!-- Header -->
+      <table width="100%" cellpadding="0" cellspacing="0" style="background:#0B1E3E;">
+        <tr><td style="padding:22px 24px 18px;">
+          <table cellpadding="0" cellspacing="0">
+            <tr>
+              <td style="padding-right:10px;vertical-align:middle;">
+                <div style="width:32px;height:32px;background:#C9A45C;border-radius:7px;display:flex;align-items:center;justify-content:center;">
+                  <svg width="17" height="17" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 2L12.5 7.5H18L13.5 11L15.5 16.5L10 13L4.5 16.5L6.5 11L2 7.5H7.5L10 2Z" fill="#0B1E3E"/>
+                  </svg>
+                </div>
+              </td>
+              <td style="vertical-align:middle;">
+                <span style="font-size:16px;font-weight:600;color:#F5F0E8;letter-spacing:0.04em;">AlphKnot</span>
+              </td>
+            </tr>
+          </table>
+          <div style="margin-top:14px;display:flex;align-items:center;gap:7px;">
+            <div style="width:7px;height:7px;background:#C9A45C;border-radius:50%;flex-shrink:0;"></div>
+            <span style="font-size:10px;color:#C9A45C;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;">Meeting Confirmed</span>
           </div>
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <div style="width: 8px; height: 8px; background: #C9A45C; border-radius: 50%; flex-shrink: 0;"></div>
-            <span style="font-size: 12px; color: #C9A45C; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;">Meeting Confirmed</span>
-          </div>
-        </div>
+        </td></tr>
+      </table>
 
-        <!-- Gold Bar -->
-        <div style="height: 3px; background: linear-gradient(90deg, #C9A45C, #E8C878, #C9A45C);"></div>
+      <!-- Gold Bar -->
+      <div style="height:3px;background:linear-gradient(90deg,#C9A45C,#E8C878,#C9A45C);"></div>
 
-        <!-- Body -->
-        <div class="ak-body" style="padding: 32px;">
+      <!-- Body -->
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr><td style="padding:22px 20px;">
 
-          <p style="font-size: 14px; color: #888; margin: 0 0 4px;">Hello,</p>
-          <p class="ak-name" style="font-size: 20px; font-weight: 600; color: #0B0B0F; margin: 0 0 20px;">${booking.name}</p>
+          <p style="font-size:12px;color:#888;margin:0 0 3px 0;">Hello,</p>
+          <p style="font-size:17px;font-weight:700;color:#0B0B0F;margin:0 0 14px 0;">${booking.name}</p>
 
-          <p style="font-size: 14px; color: #555; line-height: 1.7; margin: 0 0 24px;">
+          <p style="font-size:13px;color:#555;line-height:1.7;margin:0 0 18px 0;">
             Your meeting with <strong>AlphKnot</strong> has been confirmed. Here are your details:
           </p>
 
           <!-- Details Card -->
-          <div class="ak-details-card" style="background: #0B1E3E; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px;">
-            <div class="ak-details-row" style="display: flex; gap: 32px; flex-wrap: wrap;">
-              <div>
-                <p style="font-size: 11px; color: #C9A45C; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; margin: 0 0 4px;">Date</p>
-                <p style="font-size: 15px; color: #F5F0E8; font-weight: 600; margin: 0;">${booking.date}</p>
-              </div>
-              <div>
-                <p style="font-size: 11px; color: #C9A45C; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; margin: 0 0 4px;">Time</p>
-                <p style="font-size: 15px; color: #F5F0E8; font-weight: 600; margin: 0;">${booking.time}</p>
-              </div>
-            </div>
-          </div>
+          <table width="100%" cellpadding="0" cellspacing="0" style="background:#0B1E3E;border-radius:11px;margin-bottom:18px;">
+            <tr><td style="padding:18px 20px;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="vertical-align:top;width:50%;padding-right:10px;">
+                    <p style="font-size:10px;color:#C9A45C;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;margin:0 0 4px 0;">Date</p>
+                    <p style="font-size:14px;color:#F5F0E8;font-weight:700;margin:0;">${booking.date}</p>
+                  </td>
+                  <td style="vertical-align:top;width:50%;">
+                    <p style="font-size:10px;color:#C9A45C;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;margin:0 0 4px 0;">Time</p>
+                    <p style="font-size:14px;color:#F5F0E8;font-weight:700;margin:0;">${booking.time}</p>
+                  </td>
+                </tr>
+              </table>
+            </td></tr>
+          </table>
 
-          <!-- Join Button -->
-          <a href="${meetingLink}"
-            style="display: block; text-align: center; padding: 14px 24px;
-                   background: #C9A45C; color: #0B1E3E; text-decoration: none;
-                   border-radius: 8px; font-weight: 700; font-size: 14px; margin-bottom: 28px;">
-            Join Meeting
-          </a>
+          <!-- Join Banner -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:18px;">
+            <tr>
+              <td style="background:#C9A45C;border-radius:8px;padding:12px 16px;text-align:center;">
+                <table cellpadding="0" cellspacing="0" style="margin:auto;">
+                  <tr>
+                    <td style="padding-right:7px;vertical-align:middle;">
+                      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                        <rect x="2" y="3" width="9" height="10" rx="1.5" stroke="#0B1E3E" stroke-width="1.5"/>
+                        <path d="M11 6l3-2v8l-3-2V6z" fill="#0B1E3E"/>
+                      </svg>
+                    </td>
+                    <td style="font-size:12px;font-weight:700;color:#0B1E3E;letter-spacing:0.02em;vertical-align:middle;">
+                      A meeting link will be created shortly
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
 
           <!-- Sign Off -->
-          <p style="font-size: 13px; color: #555; line-height: 1.7; margin: 0 0 4px;">
+          <p style="font-size:13px;color:#555;line-height:1.7;margin:0 0 4px 0;">
             If you have any questions, simply reply to this email.
           </p>
-          <p style="font-size: 13px; color: #555; margin: 0;">
+          <p style="font-size:13px;color:#555;margin:0 0 20px 0;">
             Warm regards,<br/>
-            <strong style="color: #0B1E3E;">The AlphKnot Team</strong>
+            <strong style="color:#0B1E3E;">The AlphKnot Team</strong>
           </p>
 
           <!-- Footer -->
-          <div class="ak-footer" style="border-top: 1px solid #eee; margin-top: 24px; padding-top: 16px; display: flex; justify-content: space-between; align-items: center;">
-            <p style="font-size: 12px; font-weight: 600; color: #0B0B0F; margin: 0;">AlphKnot</p>
-            <p style="font-size: 11px; color: #bbb; margin: 0;">© ${new Date().getFullYear()} AlphKnot. All rights reserved.</p>
-          </div>
+          <table width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #eee;">
+            <tr>
+              <td style="padding-top:14px;vertical-align:middle;">
+                <p style="font-size:12px;font-weight:600;color:#0B0B0F;margin:0;">AlphKnot</p>
+              </td>
+              <td style="padding-top:14px;vertical-align:middle;text-align:right;">
+                <p style="font-size:11px;color:#bbb;margin:0;">© ${new Date().getFullYear()} AlphKnot. All rights reserved.</p>
+              </td>
+            </tr>
+          </table>
 
-        </div>
-      </div>
+        </td></tr>
+      </table>
+
     </div>
-      `
-    );
-
+  </div>
+  `
+);
     res.send("Meeting Accepted ✅");
 
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
+
+// Reject call
+
+export const rejectBooking = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    // updated DB
+
+    const booking = await prisma.bookCall.update({
+      where: {
+        id:Number(id)
+      },
+      data: {
+        status:"rejected"
+      }
+    })
+
+     // send rejection email to client
+    await sendEmail(
+      booking.email,
+      "Meeting Request Rejected",
+      `
+        <div style="font-family: Arial; padding:20px;">
+          <h2>Hi ${booking.name}</h2>
+
+          <p>We appreciate your interest in meeting with us.</p>
+
+          <p>
+            Unfortunately, your meeting request could not be approved at this time.
+          </p>
+
+          <p>
+            You may submit another request later.
+          </p>
+
+          <br/>
+
+          <p>Thank you,<br/>AlphKnot Team</p>
+        </div>
+      `
+    );
+
+    res.send("Meeting Rejected ❌");
+
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
+    
+  
