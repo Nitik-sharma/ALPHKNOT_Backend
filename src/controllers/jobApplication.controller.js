@@ -6,7 +6,9 @@ const prisma = new PrismaClient()
 
 export const createJobApplication = async (req, res) => {
     try {
-        const { name, email, phone, role, experience, skills, portfolio, whyUs, resumeUrl } = req.body;
+        const { name, email, phone, role, experience, skills, portfolio, whyUs } = req.body;
+
+        const resumeUrl = req.file?.path;
 
         // validation
 
@@ -25,7 +27,7 @@ export const createJobApplication = async (req, res) => {
       });
         }
         
-        const application = await prisma.JobApplication.create({
+        const application = await prisma.jobApplication.create({
             data: {
                 name,
                 email,
@@ -53,7 +55,7 @@ export const createJobApplication = async (req, res) => {
         // Email send to recruiter
 
         await sendEmail(
-            email,
+           process.env.EMAIL_USER,
             "New JobApplication"
             ,   recruiterTemplate(
     name,
@@ -73,6 +75,8 @@ export const createJobApplication = async (req, res) => {
           });
         
     } catch (error) {
+
+       console.log(JSON.stringify(error, null, 2));
          res.status(500).json({
       error: error.message,
     });
