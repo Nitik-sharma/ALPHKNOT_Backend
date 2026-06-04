@@ -1,15 +1,20 @@
 import { PrismaClient } from "@prisma/client";
 import { sendEmail } from "../utils/sendEmail.js";
-import { candidateTemplate,recruiterTemplate } from "../utils/emailTemplate.js";
+import { candidateTemplate, recruiterTemplate } from "../utils/emailTemplate.js";
+import { uploadTos3 } from "../utils/uploadToS3.js";
 
 const prisma = new PrismaClient()
 
 export const createJobApplication = async (req, res) => {
+   console.log("CONTROLLER HIT");
     try {
         const { name, email, phone, role, experience, skills, portfolio, whyUs } = req.body;
 
-        const resumeUrl = req.file?.path;
-
+      const resumeUrl = req.file
+  ? await uploadTos3(req.file)
+  : null;
+    console.log(JSON.stringify(req.file, null, 2));
+      console.log("Resume URL:", resumeUrl);
         // validation
 
          if (

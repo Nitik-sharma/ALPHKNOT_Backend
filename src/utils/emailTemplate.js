@@ -173,7 +173,23 @@ export const recruiterTemplate = (name, email, role, experience, skills, resumeU
         <td style="padding:11px 0 11px 16px;text-align:right;">${skillTags}</td>
       </tr>
     </table>
-    <a href="${resumeUrl}" style="display:block;text-align:center;background:#1F2E4F;color:#ffffff;font-size:15px;font-weight:600;padding:14px 28px;border-radius:8px;text-decoration:none;margin-top:28px;">View Resume →</a>
+   <a 
+ href="${resumeUrl}" download
+  style="
+    display:block;
+    text-align:center;
+    background:#1F2E4F;
+    color:#ffffff;
+    font-size:15px;
+    font-weight:600;
+    padding:14px 28px;
+    border-radius:8px;
+    text-decoration:none;
+    margin-top:28px;
+  "
+>
+  Download Resume 📄
+</a>
   </div>
 
   <!-- Footer -->

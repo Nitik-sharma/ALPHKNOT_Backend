@@ -11,6 +11,7 @@ router.post(
 
   (req, res, next) => {
 
+    console.log("ROUTE HIT");
     upload.single("resume")(req, res, function (err) {
 
       if (err) {
