@@ -6,6 +6,9 @@ import jobApplication from "./src/routes/jobApplication.route.js"
 import { configDotenv } from "dotenv";
 
 configDotenv();
+
+const app = express();
+
 app.use(
   cors({
     origin: [
@@ -16,7 +19,8 @@ app.use(
     credentials: true,
   })
 );
-const app = express();
+
+app.use(express.json());
 
 // middleware
 app.use(express.json());
