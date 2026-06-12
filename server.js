@@ -32,7 +32,7 @@ app.use("/api/job-application",jobApplication)
 // test route
 app.get("/", (req, res) => {
   res.send("Server is running");
-});no
+});
 
 // start server
 const PORT = 5000;
