@@ -15,6 +15,7 @@ app.use(
       "http://localhost:5173",
       "http://13.49.78.176",
       "https://alph-knot.vercel.app/",
+      "https://alphknot.com/",
     ],
     credentials: true,
   })
