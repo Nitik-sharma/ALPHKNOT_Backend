@@ -13,10 +13,12 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "http://13.49.78.176",
-      "https://alph-knot.vercel.app/",
-      "https://alphknot.com/",
+      "https://alph-knot.vercel.app",
+      "https://alphknot.com",
+      "https://www.alphknot.com",
     ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
