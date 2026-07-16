@@ -1,26 +1,27 @@
-import nodemailer from "nodemailer"
-
+import nodemailer from "nodemailer";
 
 export const sendEmail = async (to, subject, html) => {
-    try {
-        const transporter = nodemailer.createTransport({
-            service: "mail.privateemail.com",
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass:process.env.EMAIL_PASS
-            }
+  try {
+    const transporter = nodemailer.createTransport({
+      host: process.env.EMAIL_HOST,
+      port: Number(process.env.EMAIL_PORT),
+      secure: process.env.EMAIL_PORT == 465, // true only for port 465
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
 
-        })
+    await transporter.sendMail({
+      from: `"AlphKnot" <${process.env.EMAIL_USER}>`,
+      to,
+      subject,
+      html,
+    });
 
-        await transporter.sendMail({
-            from: `"AlphKnot"<${process.env.EMAIL_USER}>`,
-            to,
-            subject,
-            html,
-        })
-
-
-    } catch (error) {
-        console.log("Email Error",error)
-    }
-}
+    console.log("Email sent successfully");
+  } catch (error) {
+    console.error("Email Error:", error);
+    throw error;
+  }
+};
